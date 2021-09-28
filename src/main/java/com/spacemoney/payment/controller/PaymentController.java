@@ -7,6 +7,7 @@ import com.spacemoney.payment.orders.pais.PedidoArgentina;
 import com.spacemoney.payment.orders.pais.PedidoColombia;
 import com.spacemoney.payment.orders.pais.PedidoMexico;
 import com.spacemoney.payment.orders.pais.PedidoPeru;
+import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Post;
 
@@ -15,14 +16,14 @@ import java.util.List;
 
 import static com.spacemoney.payment.model.Pais.*;
 
-@Controller
+@Controller("/payment")
 public class PaymentController {
 
     private Pedido pedido;
     private  static List<Ticket> tickets = new ArrayList<Ticket>();
 
     @Post
-    public Ticket pagarViajeEpacio(PagoRequest pago){
+    public Ticket pagarViajeEpacio(@Body PagoRequest pago){
         Ticket ticketCompra = null;
 
         switch (pago.pais){
