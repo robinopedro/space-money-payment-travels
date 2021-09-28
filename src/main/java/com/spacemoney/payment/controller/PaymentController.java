@@ -9,6 +9,7 @@ import com.spacemoney.payment.orders.pais.PedidoMexico;
 import com.spacemoney.payment.orders.pais.PedidoPeru;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class PaymentController {
     private Pedido pedido;
     private  static List<Ticket> tickets = new ArrayList<Ticket>();
 
-    @Post
+    @Post("/pay")
     public Ticket pagarViajeEpacio(@Body PagoRequest pago){
         Ticket ticketCompra = null;
 
@@ -60,5 +61,10 @@ public class PaymentController {
         }
         tickets.add(ticketCompra);
         return ticketCompra;
+    }
+
+    @Get("/tickets")
+    public List<Ticket> obtenerTickets(){
+        return tickets;
     }
 }
